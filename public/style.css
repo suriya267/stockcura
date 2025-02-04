@@ -16,3 +16,11 @@ li:hover {
   background: white;
   color: slategray;
 }
+
+.serch-button{
+  transition: transform 0.3s ease;
+}
+
+.serch-button:hover{
+  transform: scale(1.05);
+}

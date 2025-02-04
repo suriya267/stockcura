@@ -1,8 +1,10 @@
 let editIndex = -1;
-const stockData = JSON.parse(localStorage.getItem("stockData")) || [];
+let stockData = JSON.parse(localStorage.getItem("stockData")) || [];
 const form = document.getElementById("stock-form");
 const stockTable = document.getElementById("stock-table");
 const addButton = document.getElementById("add-btn");
+const searchBar=document.getElementById("search-bar");
+const clearButton=document.getElementById("clear");
 
 addButton.addEventListener("click", () => {
   const name = document.getElementById("name").value;
@@ -29,10 +31,31 @@ addButton.addEventListener("click", () => {
   renderTable();
 });
 
+let tempStockData = deepCopy(stockData);
+
+function deepCopy(info) {
+  let stringifyInfo=  JSON.stringify(info);
+  return JSON.parse(stringifyInfo);
+}
+
+searchBar.addEventListener('input', () => {
+  const filteredResults = tempStockData.filter(item =>
+    item.name.toLowerCase().includes(searchBar.value.toLowerCase())
+  );
+  stockData=filteredResults;
+  renderTable()
+})
+
+clearButton.addEventListener("click", () => {
+  searchBar.value=''
+  stockData=deepCopy(tempStockData);
+  renderTable()
+})
+
+
 function renderTable() {
   stockTable.innerHTML = "";
   stockData.forEach((stock, index) => {
-    // const row = document.createElement("tr");
     const date = new Date(stock.expiry);
     const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
 
@@ -42,7 +65,7 @@ function renderTable() {
     li.innerHTML = `
            <div class="flex-1">
                <strong class="text-lg text-white">${stock.name}</strong>
-               <div class="text-sm text-white"><b>Expiry:</b> ${stock.expiry}</div>
+               <div class="text-sm text-white"><b>Expiry:</b> ${formattedDate}</div>
            </div>
            <div class="flex items-center space-x-4">
                <span class="text-lg font-semibold text-white">${stock.qty}</span>
@@ -51,24 +74,6 @@ function renderTable() {
     `;
     stockTable.appendChild(li);
   });
-
-  filteredEntries.forEach(entry => {
-    const li = document.createElement('li');
-    li.classList.add('flex', 'justify-between', 'items-center', 'p-4', 'bg-gray-200', 'rounded-lg', 'shadow-md', 'space-x-4');
-
-    li.innerHTML = `
-<div class="flex-1">
-    <strong class="text-lg">${entry.description}</strong>
-    <div class="text-sm text-gray-500">${entry.type}</div>
-</div>
-<div class="flex items-center space-x-4">
-    <span class="text-lg font-semibold">₹${entry.amount.toFixed(2)}</span>
-   <button class="edit-button text-white px-4 py-2 rounded-lg edit-btn" data-id="${entry.id}">Edit</button>
-    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400 delete-btn" data-id="${entry.id}">Delete</button>
-</div>
-`;
-    entryList.appendChild(li);
-});
 }
 
 function editStock(index) {
@@ -82,6 +87,8 @@ function editStock(index) {
 
 function saveToLocalStorage() {
   localStorage.setItem("stockData", JSON.stringify(stockData));
+  tempStockData=deepCopy(JSON.parse(localStorage.getItem("stockData")));    
+
 }
 
 // Render table on page load
