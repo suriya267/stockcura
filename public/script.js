@@ -4,6 +4,7 @@ const form = document.getElementById("stock-form");
 const stockTable = document.getElementById("stock-table");
 const addButton = document.getElementById("add-btn");
 const searchBar=document.getElementById("search-bar");
+// const searchDate=document.getElementById('search-date');
 const clearButton=document.getElementById("clear");
 
 addButton.addEventListener("click", () => {
@@ -46,6 +47,13 @@ searchBar.addEventListener('input', () => {
   renderTable()
 })
 
+// searchDate.addEventListener('input', () => {
+//   const selectedDate = new Date(searchDate.value);
+//   const previousDates = tempStockData.filter(date => new Date(date.expiry) <= selectedDate);
+//   stockData=previousDates;
+//   renderTable()
+// })
+
 clearButton.addEventListener("click", () => {
   searchBar.value=''
   stockData=deepCopy(tempStockData);
@@ -60,7 +68,7 @@ function renderTable() {
     const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
 
     const li = document.createElement('li');
-    li.classList.add('flex', 'justify-between', 'items-center', 'p-4', 'bg-slate-600', 'rounded-lg', 'shadow-md', 'space-x-4');
+    li.classList.add('flex', 'justify-between', 'items-center', 'p-4', stock.qty<=3 ?'bg-red-600':'bg-slate-600', 'rounded-lg', 'shadow-md', 'space-x-4');
 
     li.innerHTML = `
            <div class="flex-1">

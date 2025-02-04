@@ -43,11 +43,28 @@
           Add Stock
         </button>
       </form>
-      <div class="flex justify-between mt-10 mb-3 items-center">
+      <div class="flex justify-center mt-10 mb-3 items-center">
         <h1 class="text-3xl"><b>Stock List</b></h1>
-        <div class="flex">
-          <input id="search-bar" class="border border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pl-3"  placeholder="Search"/>
-          <button id="clear" class="serch-button border border-blue-500 ml-2 rounded-lg py-1 px-2" >Clear</button>
+      </div>
+      <div class="flex justify-end mb-5">
+        <div class="flex justify-end space-x-2">
+          <input
+            id="search-bar"
+            class="w-[75%] border border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pl-3"
+            placeholder="Search Name"
+          />
+          <!-- <input
+            id="search-date"
+            type="date"
+            class="w-[40%] border border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pl-3"
+            placeholder="Search Date"
+          /> -->
+          <button
+            id="clear"
+            class="serch-button border border-blue-500 rounded-lg py-1 px-2"
+          >
+            Clear
+          </button>
         </div>
       </div>
       <ul id="stock-table" class="space-y-4"></ul>
