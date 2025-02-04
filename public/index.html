@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stockcura</title>
+  <link href="https://fonts.googleapis.com/css2?&family=Saira:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-2xl bg-white p-6 rounded-2xl shadow-lg">
+    <h1 class="text-2xl font-bold text-center mb-4 text-indigo-600">Anbu Medicals</h1>
+        <form id="stock-form" class="flex flex-col space-y-4">
+      <input type="text" id="name" placeholder="Medicine Name" class="w-full p-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <input type="number" id="qty" placeholder="Quantity" class="w-full p-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <input type="date" id="expiry" class="w-full p-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+      <button type="button" id="add-btn" class="w-full bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-600 transition">Add Stock</button>
+    </form>
+
+    <table class="w-full mt-6 table-auto border-collapse">
+      <thead>
+        <tr class="bg-blue-100">
+          <th class="border p-2">Name</th>
+          <th class="border p-2">Quantity</th>
+          <th class="border p-2">Expiry Date</th>
+          <th class="border p-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="stock-table">
+      </tbody>
+    </table>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
