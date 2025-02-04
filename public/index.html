@@ -18,19 +18,10 @@
 
       <button type="button" id="add-btn" class="w-full bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-600 transition">Add Stock</button>
     </form>
-
-    <table class="w-full mt-6 table-auto border-collapse">
-      <thead>
-        <tr class="bg-blue-100">
-          <th class="border p-2">Name</th>
-          <th class="border p-2">Quantity</th>
-          <th class="border p-2">Expiry Date</th>
-          <th class="border p-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="stock-table">
-      </tbody>
-    </table>
+    <div class="flex justify-center mt-10 mb-3">
+      <h1 class="text-3xl"><b>Stock List</b></h1>
+    </div>
+    <ul id="stock-table" class="space-y-4"></ul>
   </div>
   <script src="script.js"></script>
 </body>

@@ -3,3 +3,16 @@ body {
   background-attachment: fixed;
   font-family: "Saira";
 }
+
+li {
+  transition: transform 0.3s ease;
+}
+
+li:hover {
+  transform: scale(1.05);
+}
+
+.edit-button{
+  background: white;
+  color: slategray;
+}

@@ -32,19 +32,43 @@ addButton.addEventListener("click", () => {
 function renderTable() {
   stockTable.innerHTML = "";
   stockData.forEach((stock, index) => {
-    const row = document.createElement("tr");
+    // const row = document.createElement("tr");
     const date = new Date(stock.expiry);
     const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-    row.innerHTML = `
-          <td class="border pl-3 py-2 pr-2">${stock.name}</td>
-          <td class="border p-2 text-center">${stock.qty}</td>
-          <td class="border p-2 text-center">${formattedDate}</td>
-          <td class="border p-2 space-x-2 flex items-center justify-center">
-            <button class="bg-yellow-400 px-4 py-1 rounded text-white" onclick="editStock(${index})">Edit</button>
-          </td>
-        `;
-    stockTable.appendChild(row);
+
+    const li = document.createElement('li');
+    li.classList.add('flex', 'justify-between', 'items-center', 'p-4', 'bg-slate-600', 'rounded-lg', 'shadow-md', 'space-x-4');
+
+    li.innerHTML = `
+           <div class="flex-1">
+               <strong class="text-lg text-white">${stock.name}</strong>
+               <div class="text-sm text-white"><b>Expiry:</b> ${stock.expiry}</div>
+           </div>
+           <div class="flex items-center space-x-4">
+               <span class="text-lg font-semibold text-white">${stock.qty}</span>
+              <button class="edit-button px-4 py-2 rounded-lg edit-btn" onclick="editStock(${index})">Edit</button>
+           </div>
+    `;
+    stockTable.appendChild(li);
   });
+
+  filteredEntries.forEach(entry => {
+    const li = document.createElement('li');
+    li.classList.add('flex', 'justify-between', 'items-center', 'p-4', 'bg-gray-200', 'rounded-lg', 'shadow-md', 'space-x-4');
+
+    li.innerHTML = `
+<div class="flex-1">
+    <strong class="text-lg">${entry.description}</strong>
+    <div class="text-sm text-gray-500">${entry.type}</div>
+</div>
+<div class="flex items-center space-x-4">
+    <span class="text-lg font-semibold">₹${entry.amount.toFixed(2)}</span>
+   <button class="edit-button text-white px-4 py-2 rounded-lg edit-btn" data-id="${entry.id}">Edit</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400 delete-btn" data-id="${entry.id}">Delete</button>
+</div>
+`;
+    entryList.appendChild(li);
+});
 }
 
 function editStock(index) {
